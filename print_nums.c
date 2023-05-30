@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
  * print_num_x - print number in hex begining with zero
  * @argts: input string
@@ -53,6 +54,7 @@ int print_num_x(va_list argts, char *buff, unsigned int buff_idx)
  * @buff_idx: buffer index
  * Return: total characters printed
  */
+
 int print_num_o(va_list argts, char *buff, unsigned int buff_idx)
 {
 	int i_input, idx, check, count, is_first;
@@ -98,6 +100,7 @@ int print_num_o(va_list argts, char *buff, unsigned int buff_idx)
  * @buff_idx: buffer index
  * Return: total characters printed
  */
+
 int print_num_X(va_list argts, char *buff, unsigned int buff_idx)
 {
 	int i_input, idx, check, count, is_first;
