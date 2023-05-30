@@ -4,11 +4,11 @@
  * print_h_x - prints a short decimal in hexadecimal
  * @argts: input string
  * @buff: pointer to buffer
- * @buffer_idx: buffer index
+ * @buff_idx: buffer index
  * Return: total characters printed
  */
 
-int print_h_x(va_list argts, char *buff, unsigned int buffer_idx)
+int print_h_x(va_list argts, char *buff, unsigned int buff_idx)
 {
 	short int i_input, idx, check, count, is_first;
 	char *hexadecimal, *bnry;
@@ -17,7 +17,7 @@ int print_h_x(va_list argts, char *buff, unsigned int buffer_idx)
 	check = 0;
 	if (i_input == 0)
 	{
-		buffer_idx = concat_buffer(buff, '0', buffer_idx);
+		buff_idx = cc_buffer(buff, '0', buff_idx);
 		return (1);
 	}
 	if (i_input < 0)
@@ -36,7 +36,7 @@ int print_h_x(va_list argts, char *buff, unsigned int buffer_idx)
 			is_first = 1;
 		if (is_first)
 		{
-			buffer_idx = concat_buffer(buff, hexadecimal[idx], buffer_idx);
+			buff_idx = cc_buffer(buff, hexadecimal[idx], buff_idx);
 			count++;
 		}
 	}
@@ -49,10 +49,10 @@ int print_h_x(va_list argts, char *buff, unsigned int buffer_idx)
  * print_h_i - prints a short integer
  * @argts: input string
  * @buff: pointer to buffer
- * @buffer_idx: buffer index
+ * @buff_idx: buffer index
  * Return: total characters printed.
  */
-int print_h_i(va_list argts, char *buff, unsigned int buffer_idx)
+int print_h_i(va_list argts, char *buff, unsigned int buff_idx)
 {
 	short int i_input;
 	unsigned short int input_int, curr, idx, mult, check;
@@ -62,7 +62,7 @@ int print_h_i(va_list argts, char *buff, unsigned int buffer_idx)
 	if (i_input < 0)
 	{
 		input_int = i_input * -1;
-		buffer_idx = concat_buffer(buff, '-', buffer_idx);
+		buff_idx = cc_buffer(buff, '-', buff_idx);
 		check = 1;
 	}
 	else
@@ -78,7 +78,7 @@ int print_h_i(va_list argts, char *buff, unsigned int buffer_idx)
 	}
 	for (idx = 0; mult > 0; mult /= 10, idx++)
 	{
-		buffer_idx = concat_buffer(buff, ((input_int / mult) % 10) + '0', buffer_idx);
+		buff_idx = cc_buffer(buff, ((input_int / mult) % 10) + '0', buff_idx);
 	}
 	return (idx + check);
 }
@@ -87,10 +87,10 @@ int print_h_i(va_list argts, char *buff, unsigned int buffer_idx)
  * print_h_o - converts long decimal to octal
  * @argts: input value
  * @buff: pointer to buffer
- * @buffer_idx: buffer index
+ * @buff_idx: buffer index
  * Return: total characters printed.
  */
-int print_h_o(va_list argts, char *buff, unsigned int buffer_idx)
+int print_h_o(va_list argts, char *buff, unsigned int buff_idx)
 {
 	short int i_input, idx, check, count, is_first;
 	char *octal, *bnry;
@@ -99,7 +99,7 @@ int print_h_o(va_list argts, char *buff, unsigned int buffer_idx)
 	check = 0;
 	if (i_input == 0)
 	{
-		buffer_idx = concat_buffer(buff, '0', buffer_idx);
+		buff_idx = cc_buffer(buff, '0', buff_idx);
 		return (1);
 	}
 	if (i_input < 0)
@@ -118,7 +118,7 @@ int print_h_o(va_list argts, char *buff, unsigned int buffer_idx)
 			is_first = 1;
 		if (is_first)
 		{
-			buffer_idx = concat_buffer(buff, octal[idx], buffer_idx);
+			buff_idx = cc_buffer(buff, octal[idx], buff_idx);
 			count++;
 		}
 	}
@@ -131,10 +131,10 @@ int print_h_o(va_list argts, char *buff, unsigned int buffer_idx)
  * print_h_u - prints a short unsigned integer
  * @argts: number to print
  * @buff: pointer to buffer
- * @buffer_idx: buffer index
+ * @buff_idx: buffer index
  * Return: total characters printed.
  */
-int print_h_u(va_list argts, char *buff, unsigned int buffer_idx)
+int print_h_u(va_list argts, char *buff, unsigned int buff_idx)
 {
 	unsigned short int input_int, curr, idx, mult;
 
@@ -151,7 +151,7 @@ int print_h_u(va_list argts, char *buff, unsigned int buffer_idx)
 
 	for (idx = 0; mult > 0; mult /= 10, idx++)
 	{
-		buffer_idx = concat_buffer(buff, ((input_int / mult) % 10) + '0', buffer_idx);
+		buff_idx = cc_buffer(buff, ((input_int / mult) % 10) + '0', buff_idx);
 	}
 	return (idx);
 }
@@ -160,10 +160,10 @@ int print_h_u(va_list argts, char *buff, unsigned int buffer_idx)
  * print_h_X - prints a short decimal in hexadecimal
  * @argts: The character to print
  * @buff: pointer to buffer
- * @buffer_idx: buffer index
+ * @buff_idx: buffer index
  * Return: total characters printed
  */
-int print_h_X(va_list argts, char *buff, unsigned int buffer_idx)
+int print_h_X(va_list argts, char *buff, unsigned int buff_idx)
 {
 	short int i_input, idx, check, count, is_first;
 	char *hexadecimal, *bnry;
@@ -173,7 +173,7 @@ int print_h_X(va_list argts, char *buff, unsigned int buffer_idx)
 
 	if (i_input == 0)
 	{
-		buffer_idx = concat_buffer(buff, '0', buffer_idx);
+		buff_idx = cc_buffer(buff, '0', buff_idx);
 		return (1);
 	}
 	if (i_input < 0)
@@ -193,7 +193,7 @@ int print_h_X(va_list argts, char *buff, unsigned int buffer_idx)
 			is_first = 1;
 		if (is_first)
 		{
-			buffer_idx = concat_buffer(buff, hexadecimal[idx], buffer_idx);
+			buff_idx = cc_buffer(buff, hexadecimal[idx], buff_idx);
 			count++;
 		}
 	}

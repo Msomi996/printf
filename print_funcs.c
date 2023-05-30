@@ -4,15 +4,15 @@
  * print_c - prints character
  * @argts: input char
  * @buff: pointer to buffer
- * @buffer_idx: buffer index
+ * @buff_idx: buffer index
  * Return: 1.
  */
-int print_c(va_list argts, char *buff, unsigned int buffer_idx)
+int print_c(va_list argts, char *buff, unsigned int buff_idx)
 {
 	char c;
 
 	c = va_arg(argts, int);
-	concat_buffer(buff, c, buffer_idx);
+	cc_buffer(buff, c, buff_idx);
 
 	return (1);
 }
@@ -22,10 +22,10 @@ int print_c(va_list argts, char *buff, unsigned int buffer_idx)
  * print_i - prints an integer
  * @argts: input string
  * @buff: pointer to buffer
- * @buffer_idx: buffer index
+ * @buff_idx: buffer index
  * Return: total characters printed.
  */
-int print_i(va_list argts, char *buff, unsigned int buffer_idx)
+int print_i(va_list argts, char *buff, unsigned int buff_idx)
 {
 	int i_input;
 	unsigned int input_int, curr, idx, mult, check;
@@ -35,7 +35,7 @@ int print_i(va_list argts, char *buff, unsigned int buffer_idx)
 	if (i_input < 0)
 	{
 		input_int = i_input * -1;
-		buffer_idx = concat_buffer(buff, '-', buffer_idx);
+		buff_idx = cc_buffer(buff, '-', buff_idx);
 		check = 1;
 	}
 	else
@@ -54,7 +54,7 @@ int print_i(va_list argts, char *buff, unsigned int buffer_idx)
 
 	for (idx = 0; mult > 0; mult /= 10, idx++)
 	{
-		buffer_idx = concat_buffer(buff, ((input_int / mult) % 10) + '0', buffer_idx);
+		buff_idx = cc_buffer(buff, ((input_int / mult) % 10) + '0', buff_idx);
 	}
 	return (idx + check);
 }
@@ -64,24 +64,24 @@ int print_i(va_list argts, char *buff, unsigned int buffer_idx)
  * print_s - prints string
  * @argts: input string
  * @buff: pointer to buffer
- * @buffer_idx: buffer index
+ * @buff_idx: buffer index
  * Return: 1.
  */
-int print_s(va_list argts, char *buff, unsigned int buffer_idx)
+int print_s(va_list argts, char *buff, unsigned int buff_idx)
 {
 	char *str;
 	unsigned int idx;
-	char nill[] = "(null)";
+	char empty[] = "(null)";
 
 	str = va_arg(argts, char *);
 	if (str == NULL)
 	{
-		for (idx = 0; nill[idx]; idx++)
-			buffer_idx = concat_buffer(buff, nill[idx], buffer_idx);
+		for (idx = 0; empty[idx]; idx++)
+			buff_idx = cc_buffer(buff, empty[idx], buff_idx);
 		return (6);
 	}
 	for (idx = 0; str[idx]; idx++)
-		buffer_idx = concat_buffer(buff, str[idx], buffer_idx);
+		buff_idx = cc_buffer(buff, str[idx], buff_idx);
 	return (idx);
 }
 
@@ -89,10 +89,10 @@ int print_s(va_list argts, char *buff, unsigned int buffer_idx)
  * print_u - prints an unsigned int
  * @argts: number to print
  * @buff: pointer to buffer
- * @buffer_idx: buffer index
+ * @buff_idx: buffer index
  * Return: total characters printed.
  */
-int print_u(va_list argts, char *buff, unsigned int buffer_idx)
+int print_u(va_list argts, char *buff, unsigned int buff_idx)
 {
 	unsigned int input_int, curr, idx, mult;
 
@@ -106,7 +106,7 @@ int print_u(va_list argts, char *buff, unsigned int buffer_idx)
 	}
 	for (idx = 0; mult > 0; mult /= 10, idx++)
 	{
-		buffer_idx = concat_buffer(buff, ((input_int / mult) % 10) + '0', buffer_idx);
+		buff_idx = cc_buffer(buff, ((input_int / mult) % 10) + '0', buff_idx);
 	}
 	return (idx);
 }
@@ -115,10 +115,10 @@ int print_u(va_list argts, char *buff, unsigned int buffer_idx)
  * print_plus_i - prints int with plus in front
  * @argts: input string
  * @buff: pointer to buffer
- * @buffer_idx: buffer index
+ * @buff_idx: buffer index
  * Return: total characters printed
  */
-int print_plus_i(va_list argts, char *buff, unsigned int buffer_idx)
+int print_plus_i(va_list argts, char *buff, unsigned int buff_idx)
 {
 	int i_input;
 	unsigned int input_int, curr, idx, mult;
@@ -127,12 +127,12 @@ int print_plus_i(va_list argts, char *buff, unsigned int buffer_idx)
 	if (i_input < 0)
 	{
 		input_int = i_input * -1;
-		buffer_idx = concat_buffer(buff, '-', buffer_idx);
+		buff_idx = cc_buffer(buff, '-', buff_idx);
 	}
 	else
 	{
 		input_int = i_input;
-		buffer_idx = concat_buffer(buff, '+', buffer_idx);
+		buff_idx = cc_buffer(buff, '+', buff_idx);
 	}
 	curr = input_int;
 	mult = 1;
@@ -143,7 +143,7 @@ int print_plus_i(va_list argts, char *buff, unsigned int buffer_idx)
 	}
 	for (idx = 0; mult > 0; mult /= 10, idx++)
 	{
-		buffer_idx = concat_buffer(buff, ((input_int / mult) % 10) + '0', buffer_idx);
+		buff_idx = cc_buffer(buff, ((input_int / mult) % 10) + '0', buff_idx);
 	}
 	return (idx + 1);
 }

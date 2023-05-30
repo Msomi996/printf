@@ -5,22 +5,22 @@
  * print_add - prints the address input
  * @argts: input address.
  * @buff: pointer to buffer
- * @buffer_idx: buffer index
+ * @buff_idx: buffer index
  * Return: total characters printed.
  */
-int print_add(va_list argts, char *buff, unsigned int buffer_idx)
+int print_add(va_list argts, char *buff, unsigned int buff_idx)
 {
 	void *add;
 	long int i_input;
 	int idx, count, is_first, check;
 	char *hexadecimal, *bnry;
-	char nill[] = "(nil)";
+	char empty[] = "(nil)";
 
 	add = (va_arg(argts, void *));
 	if (add == NULL)
 	{
-		for (idx = 0; nill[idx]; idx++)
-			buffer_idx = concat_buffer(buff, nill[idx], buffer_idx);
+		for (idx = 0; empty[idx]; idx++)
+			buff_idx = cc_buffer(buff, empty[idx], buff_idx);
 		return (5);
 	}
 	i_input = (intptr_t)add;
@@ -34,15 +34,15 @@ int print_add(va_list argts, char *buff, unsigned int buffer_idx)
 	bnry = print_binary(bnry, i_input, check, 64);
 	hexadecimal = malloc(sizeof(char) * (16 + 1));
 	hexadecimal = print_x_arr(bnry, hexadecimal, 0, 16);
-	buffer_idx = concat_buffer(buff, '0', buffer_idx);
-	buffer_idx = concat_buffer(buff, 'x', buffer_idx);
+	buff_idx = cc_buffer(buff, '0', buff_idx);
+	buff_idx = cc_buffer(buff, 'x', buff_idx);
 	for (is_first = idx = count = 0; hexadecimal[idx]; idx++)
 	{
 		if (hexadecimal[idx] != '0' && is_first == 0)
 			is_first = 1;
 		if (is_first)
 		{
-			buffer_idx = concat_buffer(buff, hexadecimal[idx], buffer_idx);
+			buff_idx = cc_buffer(buff, hexadecimal[idx], buff_idx);
 			count++;
 		}
 	}
@@ -55,10 +55,10 @@ int print_add(va_list argts, char *buff, unsigned int buffer_idx)
  * print_space_i - prints int begining with space
  * @argts: input string
  * @buff: pointer to buffer
- * @buffer_idx: buffer index
+ * @buff_idx: buffer index
  * Return: total characters printed
  */
-int print_space_i(va_list argts, char *buff, unsigned int buffer_idx)
+int print_space_i(va_list argts, char *buff, unsigned int buff_idx)
 {
 	int i_input;
 	unsigned int input_int, curr, idx, mult;
@@ -67,12 +67,12 @@ int print_space_i(va_list argts, char *buff, unsigned int buffer_idx)
 	if (i_input < 0)
 	{
 		input_int = i_input * -1;
-		buffer_idx = concat_buffer(buff, '-', buffer_idx);
+		buff_idx = cc_buffer(buff, '-', buff_idx);
 	}
 	else
 	{
 		input_int = i_input;
-		buffer_idx = concat_buffer(buff, ' ', buffer_idx);
+		buff_idx = cc_buffer(buff, ' ', buff_idx);
 	}
 	curr = input_int;
 	mult = 1;
@@ -83,7 +83,7 @@ int print_space_i(va_list argts, char *buff, unsigned int buffer_idx)
 	}
 	for (idx = 0; mult > 0; mult /= 10, idx++)
 	{
-		buffer_idx = concat_buffer(buff, ((input_int / mult) % 10) + '0', buffer_idx);
+		buff_idx = cc_buffer(buff, ((input_int / mult) % 10) + '0', buff_idx);
 	}
 	return (idx + 1);
 }
@@ -93,10 +93,10 @@ int print_space_i(va_list argts, char *buff, unsigned int buffer_idx)
  * non-printed chars
  * @argts: input string
  * @buff: pointer to buffer
- * @buffer_idx: buffer index
+ * @buff_idx: buffer index
  * Return: total characters printed
  */
-int print_S(va_list argts, char *buff, unsigned int buffer_idx)
+int print_S(va_list argts, char *buff, unsigned int buff_idx)
 {
 	unsigned char *str;
 	char *hexadecimal, *bnry;
@@ -109,17 +109,17 @@ int print_S(va_list argts, char *buff, unsigned int buffer_idx)
 	{
 		if (str[idx] < 32 || str[idx] >= 127)
 		{
-			buffer_idx = concat_buffer(buff, '\\', buffer_idx);
-			buffer_idx = concat_buffer(buff, 'x', buffer_idx);
+			buff_idx = cc_buffer(buff, '\\', buff_idx);
+			buff_idx = cc_buffer(buff, 'x', buff_idx);
 			count = str[idx];
 			bnry = print_binary(bnry, count, 0, 32);
 			hexadecimal = print_x_arr(bnry, hexadecimal, 1, 8);
-			buffer_idx = concat_buffer(buff, hexadecimal[6], buffer_idx);
-			buffer_idx = concat_buffer(buff, hexadecimal[7], buffer_idx);
+			buff_idx = cc_buffer(buff, hexadecimal[6], buff_idx);
+			buff_idx = cc_buffer(buff, hexadecimal[7], buff_idx);
 			total += 3;
 		}
 		else
-			buffer_idx = concat_buffer(buff, str[idx], buffer_idx);
+			buff_idx = cc_buffer(buff, str[idx], buff_idx);
 	}
 	free(bnry);
 	free(hexadecimal);

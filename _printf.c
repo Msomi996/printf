@@ -13,33 +13,33 @@ int write_buffer(char *buff, unsigned int byte_count)
 
 
 /**
- * concat_buffer - concat the buffer
+ * cc_buffer - concat the buffer
  * @buff: pointer to buffer
  * @c: charcter to concatenate
- * @buffer_idx: buffer index
+ * @buff_idx: buffer index
  * Return: buffer index.
  */
-unsigned int concat_buffer(char *buff, char c, unsigned int buffer_idx)
+unsigned int cc_buffer(char *buff, char c, unsigned int buff_idx)
 {
-	if (buffer_idx == 1024)
+	if (buff_idx == 1024)
 	{
-		write_buffer(buff, buffer_idx);
-		buffer_idx = 0;
+		write_buffer(buff, buff_idx);
+		buff_idx = 0;
 	}
-	buff[buffer_idx] = c;
-	buffer_idx++;
-	return (buffer_idx);
+	buff[buff_idx] = c;
+	buff_idx++;
+	return (buff_idx);
 }
 
 /**
- * _printf - formatted output conversion and print data.
+ * _printf - formats input and prints to stdout
  * @format: input string.
  * Return: total characters printed.
  */
 
 int _printf(const char *format, ...)
 {
-	unsigned int idx = 0, length = 0, buffer_idx = 0;
+	unsigned int idx = 0, length = 0, buff_idx = 0;
 	int (*func)(va_list, char *, unsigned int);
 	va_list argts;
 	char *buffer;
@@ -54,7 +54,7 @@ int _printf(const char *format, ...)
 		if (format[idx] == '%')
 		{
 			if (format[idx + 1] == '\0')
-			{	write_buffer(buffer, buffer_idx), free(buffer), va_end(argts);
+			{	write_buffer(buffer, buff_idx), free(buffer), va_end(argts);
 				return (-1);
 			}
 			else
@@ -63,21 +63,21 @@ int _printf(const char *format, ...)
 				{
 					if (format[idx + 1] == ' ' && !format[idx + 2])
 						return (-1);
-					concat_buffer(buffer, format[idx], buffer_idx), length++, idx--;
+					cc_buffer(buffer, format[idx], buff_idx), length++, idx--;
 				}
 				else
 				{
-					length += func(argts, buffer, buffer_idx);
+					length += func(argts, buffer, buff_idx);
 					idx += id_count_func(format, idx + 1);
 				}
 			} idx++;
 		}
 		else
-			concat_buffer(buffer, format[idx], buffer_idx), length++;
-		for (buffer_idx = length; buffer_idx > 1024; buffer_idx -= 1024)
+			cc_buffer(buffer, format[idx], buff_idx), length++;
+		for (buff_idx = length; buff_idx > 1024; buff_idx -= 1024)
 			;
 	}
-	write_buffer(buffer, buffer_idx), free(buffer), va_end(argts);
+	write_buffer(buffer, buff_idx), free(buffer), va_end(argts);
 	return (length);
 }
 

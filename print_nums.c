@@ -3,11 +3,11 @@
  * print_num_x - print number in hex begining with zero
  * @argts: input string
  * @buff: pointer to buffer
- * @buffer_idx: buffer index
+ * @buff_idx: buffer index
  * Return: total characters printed
  */
 
-int print_num_x(va_list argts, char *buff, unsigned int buffer_idx)
+int print_num_x(va_list argts, char *buff, unsigned int buff_idx)
 {
 	int i_input, idx, check, count, is_first;
 	char *hexadecimal, *bnry;
@@ -16,7 +16,7 @@ int print_num_x(va_list argts, char *buff, unsigned int buffer_idx)
 	check = 0;
 	if (i_input == 0)
 	{
-		buffer_idx = concat_buffer(buff, '0', buffer_idx);
+		buff_idx = cc_buffer(buff, '0', buff_idx);
 		return (1);
 	}
 	if (i_input < 0)
@@ -24,8 +24,8 @@ int print_num_x(va_list argts, char *buff, unsigned int buffer_idx)
 		i_input = (i_input * -1) - 1;
 		check = 1;
 	}
-	buffer_idx = concat_buffer(buff, '0', buffer_idx);
-	buffer_idx = concat_buffer(buff, 'x', buffer_idx);
+	buff_idx = cc_buffer(buff, '0', buff_idx);
+	buff_idx = cc_buffer(buff, 'x', buff_idx);
 	bnry = malloc(sizeof(char) * (32 + 1));
 	bnry = print_binary(bnry, i_input, check, 32);
 	hexadecimal = malloc(sizeof(char) * (8 + 1));
@@ -36,7 +36,7 @@ int print_num_x(va_list argts, char *buff, unsigned int buffer_idx)
 			is_first = 1;
 		if (is_first)
 		{
-			buffer_idx = concat_buffer(buff, hexadecimal[idx], buffer_idx);
+			buff_idx = cc_buffer(buff, hexadecimal[idx], buff_idx);
 			count++;
 		}
 	}
@@ -50,10 +50,10 @@ int print_num_x(va_list argts, char *buff, unsigned int buffer_idx)
  * print_num_o - print octals excluding 0s
  * @argts: input value
  * @buff: pointer to buffer
- * @buffer_idx: buffer index
+ * @buff_idx: buffer index
  * Return: total characters printed
  */
-int print_num_o(va_list argts, char *buff, unsigned int buffer_idx)
+int print_num_o(va_list argts, char *buff, unsigned int buff_idx)
 {
 	int i_input, idx, check, count, is_first;
 	char *octal, *bnry;
@@ -62,7 +62,7 @@ int print_num_o(va_list argts, char *buff, unsigned int buffer_idx)
 	check = 0;
 	if (i_input == 0)
 	{
-		buffer_idx = concat_buffer(buff, '0', buffer_idx);
+		buff_idx = cc_buffer(buff, '0', buff_idx);
 		return (1);
 	}
 	if (i_input < 0)
@@ -70,7 +70,7 @@ int print_num_o(va_list argts, char *buff, unsigned int buffer_idx)
 		i_input = (i_input * -1) - 1;
 		check = 1;
 	}
-	buffer_idx = concat_buffer(buff, '0', buffer_idx);
+	buff_idx = cc_buffer(buff, '0', buff_idx);
 	bnry = malloc(sizeof(char) * (32 + 1));
 	bnry = print_binary(bnry, i_input, check, 32);
 	octal = malloc(sizeof(char) * (11 + 1));
@@ -81,7 +81,7 @@ int print_num_o(va_list argts, char *buff, unsigned int buffer_idx)
 			is_first = 1;
 		if (is_first)
 		{
-			buffer_idx = concat_buffer(buff, octal[idx], buffer_idx);
+			buff_idx = cc_buffer(buff, octal[idx], buff_idx);
 			count++;
 		}
 	}
@@ -95,10 +95,10 @@ int print_num_o(va_list argts, char *buff, unsigned int buffer_idx)
  * print_num_X - prints uppercase hex
  * @argts: input value
  * @buff: pointer to buffer
- * @buffer_idx: buffer index
+ * @buff_idx: buffer index
  * Return: total characters printed
  */
-int print_num_X(va_list argts, char *buff, unsigned int buffer_idx)
+int print_num_X(va_list argts, char *buff, unsigned int buff_idx)
 {
 	int i_input, idx, check, count, is_first;
 	char *hexadecimal, *bnry;
@@ -107,7 +107,7 @@ int print_num_X(va_list argts, char *buff, unsigned int buffer_idx)
 	check = 0;
 	if (i_input == 0)
 	{
-		buffer_idx = concat_buffer(buff, '0', buffer_idx);
+		buff_idx = cc_buffer(buff, '0', buff_idx);
 		return (1);
 	}
 	if (i_input < 0)
@@ -115,8 +115,8 @@ int print_num_X(va_list argts, char *buff, unsigned int buffer_idx)
 		i_input = (i_input * -1) - 1;
 		check = 1;
 	}
-	buffer_idx = concat_buffer(buff, '0', buffer_idx);
-	buffer_idx = concat_buffer(buff, 'X', buffer_idx);
+	buff_idx = cc_buffer(buff, '0', buff_idx);
+	buff_idx = cc_buffer(buff, 'X', buff_idx);
 	bnry = malloc(sizeof(char) * (32 + 1));
 	bnry = print_binary(bnry, i_input, check, 32);
 	hexadecimal = malloc(sizeof(char) * (8 + 1));
@@ -127,7 +127,7 @@ int print_num_X(va_list argts, char *buff, unsigned int buffer_idx)
 			is_first = 1;
 		if (is_first)
 		{
-			buffer_idx = concat_buffer(buff, hexadecimal[idx], buffer_idx);
+			buff_idx = cc_buffer(buff, hexadecimal[idx], buff_idx);
 			count++;
 		}
 	}
