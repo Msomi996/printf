@@ -25,6 +25,7 @@
 #define F_HASH 8
 #define F_SPACE 16
 
+struct fmt
 {
 	char fmt;
 	int (*fn)(va_list, char[], int, int, int, int);

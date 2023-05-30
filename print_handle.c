@@ -1,7 +1,7 @@
 #include "main.h"
 /**
- * handle_print - Outputs an argument based on its type
- * @fmt: String format used to print the argument
+ * handle_print - outputs an argument based on its type
+ * @fmt: string format used to output the argument 
  * @list: List of arguments to be printed.
  * @ind: ind.
  * @buffer: Buffer array to handle print.
@@ -15,6 +15,10 @@ int handle_print(const char *fmt, int *ind, va_list list, char buffer[],
 	int flags, int width, int precision, int size)
 {
 	int i, unknow_len = 0, printed_chars = -1;
+	int print_char, print_string, print_percent, print_int, print_int, 
+	    print_binary, print_unsigned, print_octal, print_hexadecimal, 
+	    print_hexa_upper, print_pointer, print_non_printable, 
+	    print_reverse, print_rot13string;
 	fmt_t fmt_types[] = {
 		{'c', print_char}, {'s', print_string}, {'%', print_percent},
 		{'i', print_int}, {'d', print_int}, {'b', print_binary},
