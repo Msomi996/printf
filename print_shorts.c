@@ -52,6 +52,7 @@ int print_h_x(va_list argts, char *buff, unsigned int buff_idx)
  * @buff_idx: buffer index
  * Return: total characters printed.
  */
+
 int print_h_i(va_list argts, char *buff, unsigned int buff_idx)
 {
 	short int i_input;
@@ -90,6 +91,7 @@ int print_h_i(va_list argts, char *buff, unsigned int buff_idx)
  * @buff_idx: buffer index
  * Return: total characters printed.
  */
+
 int print_h_o(va_list argts, char *buff, unsigned int buff_idx)
 {
 	short int i_input, idx, check, count, is_first;
@@ -134,6 +136,7 @@ int print_h_o(va_list argts, char *buff, unsigned int buff_idx)
  * @buff_idx: buffer index
  * Return: total characters printed.
  */
+
 int print_h_u(va_list argts, char *buff, unsigned int buff_idx)
 {
 	unsigned short int input_int, curr, idx, mult;
@@ -163,6 +166,7 @@ int print_h_u(va_list argts, char *buff, unsigned int buff_idx)
  * @buff_idx: buffer index
  * Return: total characters printed
  */
+
 int print_h_X(va_list argts, char *buff, unsigned int buff_idx)
 {
 	short int i_input, idx, check, count, is_first;
