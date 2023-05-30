@@ -1,66 +1,83 @@
 #include "main.h"
 
-void print_buffer(char buffer[], int *buff_ind);
+/**
+ * write_buffer - prints buffer
+ * @buff: pointer to buffer
+ * @byte_count: number of bytes to print
+ * Return: total bytes printed
+ */
+int write_buffer(char *buff, unsigned int byte_count)
+{
+	return (write(1, buff, byte_count));
+}
+
 
 /**
- * _printf - Printf function
- * @format: format.
- * Return: Printed chars.
+ * concat_buffer - concat the buffer
+ * @buff: pointer to buffer
+ * @c: charcter to concatenate
+ * @buffer_idx: buffer index
+ * Return: buffer index.
  */
+unsigned int concat_buffer(char *buff, char c, unsigned int buffer_idx)
+{
+	if (buffer_idx == 1024)
+	{
+		write_buffer(buff, buffer_idx);
+		buffer_idx = 0;
+	}
+	buff[buffer_idx] = c;
+	buffer_idx++;
+	return (buffer_idx);
+}
+
+/**
+ * _printf - formatted output conversion and print data.
+ * @format: input string.
+ * Return: total characters printed.
+ */
+
 int _printf(const char *format, ...)
 {
-	int i, printed = 0, printed_chars = 0;
-	int flags, width, precision, size, buff_ind = 0;
-	va_list list;
-	char buffer[BUFF_SIZE];
+	unsigned int idx = 0, length = 0, buffer_idx = 0;
+	int (*func)(va_list, char *, unsigned int);
+	va_list argts;
+	char *buffer;
 
-	if (format == NULL)
+	va_start(argts, format), buffer = malloc(sizeof(char) * 1024);
+	if (!format || !buffer || (format[idx] == '%' && !format[idx + 1]))
 		return (-1);
-
-	va_start(list, format);
-
-	for (i = 0; format && format[i] != '\0'; i++)
+	if (!format[idx])
+		return (0);
+	for (idx = 0; format && format[idx]; idx++)
 	{
-		if (format[i] != '%')
+		if (format[idx] == '%')
 		{
-			buffer[buff_ind++] = format[i];
-			if (buff_ind == BUFF_SIZE)
-				print_buffer(buffer, &buff_ind);
-			/* write(1, &format[i], 1);*/
-			printed_chars++;
+			if (format[idx + 1] == '\0')
+			{	write_buffer(buffer, buffer_idx), free(buffer), va_end(argts);
+				return (-1);
+			}
+			else
+			{	func = get_funcs(format, idx + 1);
+				if (func == NULL)
+				{
+					if (format[idx + 1] == ' ' && !format[idx + 2])
+						return (-1);
+					concat_buffer(buffer, format[idx], buffer_idx), length++, idx--;
+				}
+				else
+				{
+					length += func(argts, buffer, buffer_idx);
+					idx += id_count_func(format, idx + 1);
+				}
+			} idx++;
 		}
 		else
-		{
-			print_buffer(buffer, &buff_ind);
-			flags = get_flags(format, &i);
-			width = get_width(format, &i, list);
-			precision = get_precision(format, &i, list);
-			size = get_size(format, &i);
-			++i;
-			printed = handle_print(format, &i, list, buffer,
-				flags, width, precision, size);
-			if (printed == -1)
-				return (-1);
-			printed_chars += printed;
-		}
+			concat_buffer(buffer, format[idx], buffer_idx), length++;
+		for (buffer_idx = length; buffer_idx > 1024; buffer_idx -= 1024)
+			;
 	}
-
-	print_buffer(buffer, &buff_ind);
-
-	va_end(list);
-
-	return (printed_chars);
+	write_buffer(buffer, buffer_idx), free(buffer), va_end(argts);
+	return (length);
 }
 
-/**
- * print_buffer - return the information in the bufffer if there is any
- * @buffer: Array of chars
- * @buff_ind: Index at which to add next char, represents the length.
- */
-void print_buffer(char buffer[], int *buff_ind)
-{
-	if (*buff_ind > 0)
-		write(1, &buffer[0], *buff_ind);
-
-	*buff_ind = 0;
-}
